@@ -25,7 +25,7 @@ MODEL_NAME = "gemini-2.5-flash"
 
 
 def tester(outfit, genders_styles, weather):
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+    client = genai.Client(api_key=os.environ.get(""))
 
     prompt = f"""
     You are a strict fashion critic.
@@ -86,7 +86,7 @@ def tester(outfit, genders_styles, weather):
 
 
 def get_outfit_from_ai(weather, genders_styles, fashion_db):
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+    client = genai.Client(api_key=os.environ.get(""))
 
     prompt = f"""
     You are a professional fashion stylist.
@@ -165,7 +165,7 @@ def get_outfit_from_ai(weather, genders_styles, fashion_db):
 
 
 def weather_generator():
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+    client = genai.Client(api_key=os.environ.get(""))
 
     prompt = """
     Your task is to generate 10 plausible current weather conditions for your 10 preffered city
