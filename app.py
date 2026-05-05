@@ -22,15 +22,31 @@ def generate():
     lat = data["lat"]
     lon = data["lon"]
 
-    result = generate_full_outfit(gender, style, lat, lon)
+    try:
+        result = generate_full_outfit(gender, style, lat, lon)
 
-    return jsonify({
-        "image": f"http://127.0.0.1:5000/image/{result['image_path']}",
-        "items": result["items"],
-        "city": result["city"],
-        "temperature": result["temperature"],
-        "weather": result["weather"]
-    })
+        if result['image_path'] is None:
+            return jsonify({
+                "image": None,
+                "items": result["items"],
+                "city": result["city"],
+                "temperature": result["temperature"],
+                "weather": result["weather"],
+                "warning": "Outfit photo failed to generate. Please retry."
+            }), 200
+
+        return jsonify({
+            "image": f"http://127.0.0.1:5000/image/{result['image_path']}",
+            "items": result["items"],
+            "city": result["city"],
+            "temperature": result["temperature"],
+            "weather": result["weather"]
+        })
+    
+    except Exception as e:
+        return jsonify({
+            "error": f"Server error: {str(e)}"
+        }), 500
 
 
 @app.route("/image/<path:filename>")
@@ -71,13 +87,18 @@ def weather_route():
     lat = data["lat"]
     lon = data["lon"]
 
-    weather = get_weather(lat, lon)
+    try:
+        weather = get_weather(lat, lon)
 
-    return jsonify({
-        "city": weather["city"],
-        "temperature": weather["temp"],
-        "weather": weather["description"]
-    })
+        return jsonify({
+            "city": weather["city"],
+            "temperature": weather["temp"],
+            "weather": weather["description"]
+        })
+    except Exception as e:
+        return jsonify({
+            "error": f"Failed to get weather: {str(e)}"
+        }), 500
 
 
 app.run(debug=True)
