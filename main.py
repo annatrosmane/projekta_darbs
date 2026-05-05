@@ -28,10 +28,11 @@ STYLE_DATABASE = {
     "grunge": GRUNGE_DB
 }
 
+GEMINI_API_KEY = "AIzaSyC3O3j_C3qMhPuBSb4QrVEwIO35J-6Z1QY"  # Šeit ir jūsu Gemini API ключ
 
 
 def get_weather(lat, lon):
-    token = "" # Šeit ir jūsu token laikapstākļu iegūšanai
+    token = "8ba789c63cac97996ef176689a8e5c60"  # Šeit ir jūsu token laikapstākļu iegūšanai
 
     data_weather = requests.get(
         f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={token}&units=metric"
@@ -49,7 +50,7 @@ def get_weather(lat, lon):
 
 
 def get_outfit_from_ai(weather, gender, style, fashion_db):
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+    client = genai.Client(api_key=GEMINI_API_KEY)
 
     prompt = f"""
     You are a professional fashion stylist.
@@ -145,7 +146,7 @@ def get_outfit_from_ai(weather, gender, style, fashion_db):
 
 def get_products(search_text):
     params = (
-        ('token', ''), # Šeit ir jūsu token AliExpress produktu atlasīšanai
+        ('token', 'FCFlixtxVwU7TfbdQWPxLQ'),  # Šeit ir jūsu token AliExpress produktu atlasīšanai
         ('scraper', 'aliexpress-serp'),
         ('format', 'json'),
         ('country', 'US'),
@@ -235,7 +236,7 @@ def load_image_part(path):
 
 
 def generate_outfit(image_paths, outfit):
-    client = genai.Client(api_key=os.environ.get("")) # Šeit ir jūsu Gemini API token
+    client = genai.Client(api_key=GEMINI_API_KEY)
     contents = [load_image_part(p) for p in image_paths]
     prompt = build_tryon_prompt(outfit)
     contents.append(types.Part.from_text(text=prompt))
