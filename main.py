@@ -28,11 +28,11 @@ STYLE_DATABASE = {
     "grunge": GRUNGE_DB
 }
 
-GEMINI_API_KEY = "AIzaSyC3O3j_C3qMhPuBSb4QrVEwIO35J-6Z1QY"  # Šeit ir jūsu Gemini API ключ
+GEMINI_API_KEY = ""  # Šeit ir jūsu Gemini API ключ
 
 
 def get_weather(lat, lon):
-    token = "8ba789c63cac97996ef176689a8e5c60"  # Šeit ir jūsu token laikapstākļu iegūšanai
+    token = ""  # Šeit ir jūsu token laikapstākļu iegūšanai
 
     data_weather = requests.get(
         f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={token}&units=metric"
@@ -146,7 +146,7 @@ def get_outfit_from_ai(weather, gender, style, fashion_db):
 
 def get_products(search_text):
     params = (
-        ('token', 'FCFlixtxVwU7TfbdQWPxLQ'),  # Šeit ir jūsu token AliExpress produktu atlasīšanai
+        ('token', ''),  # Šeit ir jūsu token AliExpress produktu atlasīšanai
         ('scraper', 'aliexpress-serp'),
         ('format', 'json'),
         ('country', 'US'),
